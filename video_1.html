@@ -29,14 +29,12 @@
             async function onFinish(id) {
                 const url = new URL(window.location != window.parent.location ? document.referrer : document.location.href);
                 const searchParams = new URLSearchParams(url.search);
-                
+
                 if (searchParams.get("id")) {
                     hasId = true;
                 }
-                elseif (document.get("id")) {
-                    hasId = true;
-                }
-                const url = "https://script.google.com/macros/s/AKfycbwnw94z31eF3N0NC53cauDMXGC1QPTFyvcmo3flJqUFHlvnA54_nfAl34Ka95lbY6rV/exec";
+
+                const requestUrl = "https://script.google.com/macros/s/AKfycbwnw94z31eF3N0NC53cauDMXGC1QPTFyvcmo3flJqUFHlvnA54_nfAl34Ka95lbY6rV/exec";
                 const data = new FormData();
                 data.append("event_type", "video_finished");
                 data.append("unique_id", searchParams.get("id"));
@@ -44,7 +42,7 @@
                     method: "post",
                     body: data,
                 };
-                await fetch(url, params);
+                await fetch(requestUrl, params);
             }
         })();
     </script>
