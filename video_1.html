@@ -23,13 +23,14 @@
             // When the player is ready, add listeners for pause, finish, and playProgress
             player.addEvent('ready', function () {
                 player.addEvent('finish', onFinish);
+                console.log("Setup done");
             });
-            console.log("Setup done");
+            
 
             async function onFinish(id) {
                 const url = new URL(window.location != window.parent.location ? document.referrer : document.location.href);
                 const searchParams = new URLSearchParams(url.search);
-
+                debugger;
                 if (searchParams.get("id")) {
                     hasId = true;
                 }
