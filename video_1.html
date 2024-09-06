@@ -22,6 +22,8 @@
             console.log("Setup done");
 
             async function onFinish(id) {
+                console.log("Video finished");
+                debugger;
                 const searchParams = new URLSearchParams(window.location.search);
                 if (!searchParams.get("id")) {
                     return;
