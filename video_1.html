@@ -17,9 +17,9 @@
 
             // When the player is ready, add listeners for pause, finish, and playProgress
             player.addEvent('ready', function () {
+                console.log("Setup done");
                 player.addEvent('finish', onFinish);
             });
-            console.log("Setup done");
 
             async function onFinish(id) {
                 console.log("Video finished");
