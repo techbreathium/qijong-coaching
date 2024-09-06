@@ -1,46 +1,46 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
     <script src="https://techbreathium.github.io/qijong-coaching/froogaloop2.min.js"></script>
 </head>
+
 <body>
-    <iframe id="video"
+    <div id="vimeo">
+        <iframe
             src="https://player.vimeo.com/video/982634372?title=0&amp;byline=0&amp;portrait=0&amp;color=ea5045&amp;autoplay=1"
             width="280" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-    </iframe>
+        </iframe>
+    </div>
     <script type="text/javascript">
-        const setup = function() {
-            let iframe = document.querySelector('#video'), player = $f(iframe);
-            if(!iframe) {
-                return;
-            }
-
-            // When the player is ready, add listeners for pause, finish, and playProgress
-            player.addEvent('ready', function () {
-                console.log("Setup done");
-                player.addEvent('finish', onFinish);
-            });
-
-            async function onFinish(id) {
-                console.log("Video finished");
-                debugger;
-                const searchParams = new URLSearchParams(window.location.search);
-                if (!searchParams.get("id")) {
-                    return;
-                }
-                const url = "https://script.google.com/macros/s/AKfycbwnw94z31eF3N0NC53cauDMXGC1QPTFyvcmo3flJqUFHlvnA54_nfAl34Ka95lbY6rV/exec";
-                const data = new FormData();
-                data.append("event_type", "video_finished");
-                data.append("unique_id", searchParams.get("id"));
-                const params = {
-                    method: "post",
-                    body: data,
-                };
-                await fetch(url, params);
-            }
+        let iframe = document.querySelector('#vimeo iframe'), player = $f(iframe);
+        if(!iframe) {
+            return;
         }
 
-        setup();
+        // When the player is ready, add listeners for pause, finish, and playProgress
+        player.addEvent('ready', function () {
+            player.addEvent('finish', onFinish);
+        });
+        console.log("Setup done");
+
+        async function onFinish(id) {
+            debugger;
+            const searchParams = new URLSearchParams(window.location.search);
+            if (!searchParams.get("id")) {
+                return;
+            }
+            const url = "https://script.google.com/macros/s/AKfycbwnw94z31eF3N0NC53cauDMXGC1QPTFyvcmo3flJqUFHlvnA54_nfAl34Ka95lbY6rV/exec";
+            const data = new FormData();
+            data.append("event_type", "video_finished");
+            data.append("unique_id", searchParams.get("id"));
+            const params = {
+                method: "post",
+                body: data,
+            };
+            await fetch(url, params);
+        }
     </script>
 </body>
 
