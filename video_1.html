@@ -27,7 +27,7 @@
             console.log("Setup done");
 
             async function onFinish(id) {
-                const url = new URL((window.location != window.parent.location) ? document.referrer : document.location.href);
+                const url = new URL(window.location != window.parent.location ? document.referrer : document.location.href);
                 const searchParams = new URLSearchParams(url.search);
                 
                 if (searchParams.get("id")) {
